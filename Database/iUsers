@@ -1,7 +1,0 @@
-const pool = require("./createdb")
-
-const promiseConnection = pool.promise()
-let createUser = `
-INSERT INTO Users(username, email, password_hash, first_name, last_name, address,
-    phone_number)VALUES();
-`

@@ -1,7 +1,7 @@
-const mysql = require("mysql2");
-require("dotenv").config();
-
-const pool = mysql.createPool({
+import mysql from "mysql2"
+import dotenv from "dotenv";
+dotenv.config();
+export let pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.DBUSER,
   password: process.env.PASSWORD,
@@ -16,7 +16,8 @@ const createTables = [
 `
 CREATE TABLE IF NOT EXISTS Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
-    username VARCHAR(45) NOT NULL UNIQUE,
+    first_name VARCHAR(45) NOT NULL,
+    last_name VARCHAR(45) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(200) NOT NULL,
     phone_number varchar(50) NOT NULL UNIQUE
@@ -109,5 +110,4 @@ Promise.all(createTables.map(query=>{
     })
 
 }))
-
-module.exports = pool;
+export default pool;
