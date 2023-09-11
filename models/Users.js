@@ -16,6 +16,7 @@ export function createUser(
   last_name,
   email,
   password_hash,
+
   phone_number
 ) {
   console.log("Happens in insert function")

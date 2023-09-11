@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Categories (
 CREATE TABLE IF NOT EXISTS Orders(
     order_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
     user_id INT,
-    order_date DATETIME NOT NULL,
+    order_date TIMESTAMP NOT NULL DEFAULT NOW(),
     status ENUM("pending", "shipped", "delivered"),
     total_amount FLOAT,
     FOREIGN KEY (user_id) REFERENCES Users (user_id)
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS Products(
     price FLOAT NOT NULL,
     stock_quantity VARCHAR(45) NOT NULL,
     category_id INT,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now(),
     FOREIGN KEY (category_id) REFERENCES Categories (category_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE

@@ -1,5 +1,5 @@
 import { pool } from "../models/createdb.js";
-import { createUser } from "../models/iUsers.js";
+import { createUser } from "../models/Users.js";
 import bcrypt from "bcrypt";
 import JWT from 'jsonwebtoken';
 
