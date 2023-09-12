@@ -1,6 +1,6 @@
-import { pool } from "../models/createdb.js";
-import { createProduct } from "../models/Product.js";
-import { handleImageUpload } from "../middleware/imageUpload.js";
+import { pool } from "../../models/createdb.js";
+import { createProduct } from "../../models/ProductModels/createProduct.js";
+import { handleImageUpload } from "../../middleware/imageUpload.js";
 
 const poolPromise = pool.promise();
 export const createProductController = async (req, res) => {
@@ -28,4 +28,3 @@ export const createProductController = async (req, res) => {
     res.status(500).json({ error: "Error creating product" });
   }
 };
-module.exports={createProductController}

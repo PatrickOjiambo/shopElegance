@@ -9,4 +9,6 @@ export const createCategoryController = async (req, res) => {
     res.status(500).json({ error: "Error creating a category" });
   }
 };
+
+
 module.exports = { createCategoryController };
