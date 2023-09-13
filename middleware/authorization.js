@@ -1,3 +1,3 @@
-const isAuthorized = (req, res)=>{
-    
-}
+const isAuthorized = (req, res) => {
+
+};

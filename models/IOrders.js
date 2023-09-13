@@ -1,7 +1,7 @@
-const pool = require("./createdb")
+const pool = require('./createdb');
 
-let user_id = `SELECT user_id FROM Users `
+const user_id = 'SELECT user_id FROM Users ';
 
-let createOrder = `
+const createOrder = `
 INSERT INTO Orders()
-`
+`;

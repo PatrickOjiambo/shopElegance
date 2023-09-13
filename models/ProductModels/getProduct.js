@@ -1,6 +1,6 @@
-import pool from "../createdb.js";
+import pool from '../createdb.js';
 
-export function getProducts(){
-let getProductQuery = 'SELECT'
+export function getProducts () {
+  const getProductQuery = 'SELECT';
 }
-module.exports = {getProducts}
+module.exports = { getProducts };

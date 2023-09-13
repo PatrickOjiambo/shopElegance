@@ -1,6 +1,6 @@
-import pool from "../createdb.js";
+import pool from '../createdb.js';
 
-//Check the product id. Make sure the corresponding implementation elsewhere is okay.
+// Check the product id. Make sure the corresponding implementation elsewhere is okay.
 /**
  *
  * @param {string} name - The product's name
@@ -10,20 +10,20 @@ import pool from "../createdb.js";
  * @param {string} category_id - The category_id of the product
  * @param {string} product_id - The product id of the product to be updated.
  */
-export function updateProduct(
+export function updateProduct (
   name,
   description,
   price,
   stock_quantity,
   product_id
 ) {
-  let updateProductQuery =
-    "UPDATE Products SET name = ?, \
+  const updateProductQuery =
+    'UPDATE Products SET name = ?, \
   description = ?,\
    price = ?, \
    stock_quantity = ?, \
    category_id = ? \
-   WHERE product_id = ?";
+   WHERE product_id = ?';
   return new Promise((resolve, reject) => {
     poolPromise.query(
       updateProductQuery,
@@ -31,10 +31,8 @@ export function updateProduct(
       (error, result) => {
         if (error) {
           reject(error);
-          return;
         } else {
           resolve(result);
-          return;
         }
       }
     );

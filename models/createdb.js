@@ -1,14 +1,12 @@
-import mysql from "mysql2"
-import dotenv from "dotenv";
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
 dotenv.config();
-export let pool = mysql.createPool({
+export const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.DBUSER,
   password: process.env.PASSWORD,
-  database: process.env.DBNAME,
+  database: process.env.DBNAME
 });
-
-
 
 const promiseConnection = pool.promise();
 
@@ -31,8 +29,7 @@ CREATE TABLE IF NOT EXISTS Categories (
     name VARCHAR(45) NOT NULL
 );
 
-`
-,
+`,
 `
 CREATE TABLE IF NOT EXISTS Orders(
     order_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
@@ -44,8 +41,7 @@ CREATE TABLE IF NOT EXISTS Orders(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
-`
-,
+`,
 `
 CREATE TABLE IF NOT EXISTS Products(
     product_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
@@ -60,8 +56,7 @@ CREATE TABLE IF NOT EXISTS Products(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
-`
-,
+`,
 `
 CREATE TABLE IF NOT EXISTS Order_items(
     order_item_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
@@ -76,8 +71,7 @@ CREATE TABLE IF NOT EXISTS Order_items(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
-`
-,
+`,
 `
 CREATE TABLE IF NOT EXISTS Reviews(
     review_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
@@ -87,8 +81,7 @@ CREATE TABLE IF NOT EXISTS Reviews(
     comment VARCHAR(45),
     created_at DATETIME NOT NULL
 );
-`
-,
+`,
 `
 CREATE TABLE IF NOT EXISTS Images(
     image_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
@@ -99,15 +92,14 @@ CREATE TABLE IF NOT EXISTS Images(
     ON UPDATE CASCADE
 
 );
-`,
-]
+`
+];
 
-Promise.all(createTables.map(query=>{
-    promiseConnection.query(query)
-    .then(()=>{console.log("Tables created successfully")})
-    .catch(error=>{
-        console.log("Error", error);
-    })
-
-}))
+Promise.all(createTables.map(query => {
+  promiseConnection.query(query)
+    .then(() => { console.log('Tables created successfully'); })
+    .catch(error => {
+      console.log('Error', error);
+    });
+}));
 export default pool;

@@ -1,6 +1,6 @@
-import pool from "./createdb.js";
+import pool from './createdb.js';
 
-const promiseConnection = pool.promise()
+const promiseConnection = pool.promise();
 /**
  * Create a new user in the database.
  *
@@ -11,7 +11,7 @@ const promiseConnection = pool.promise()
  * @param {string} phone_number - The user's phone number.
  * @returns {Promise} A Promise that resolves if the user is created successfully or rejects with an error.
  */
-export function createUser(
+export function createUser (
   first_name,
   last_name,
   email,
@@ -19,9 +19,9 @@ export function createUser(
 
   phone_number
 ) {
-  console.log("Happens in insert function")
-  let createUserQuery =
-    "INSERT INTO Users(first_name, last_name, email, password_hash, phone_number) VALUES(?, ?, ?, ?, ?)";
+  console.log('Happens in insert function');
+  const createUserQuery =
+    'INSERT INTO Users(first_name, last_name, email, password_hash, phone_number) VALUES(?, ?, ?, ?, ?)';
   return new Promise((resolve, reject) => {
     promiseConnection.query(
       createUserQuery,
@@ -29,11 +29,8 @@ export function createUser(
       (error, result) => {
         if (error) {
           reject(error);
-          return;
         } else {
           resolve(result);
-          return;
-                    
         }
       }
     );

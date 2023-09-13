@@ -1,5 +1,5 @@
-import pool from "../createdb.js";
-//Check the category_id well. Could be a problem
+import pool from '../createdb.js';
+// Check the category_id well. Could be a problem
 // Provide a corresponding implementation of it elsewhere
 const poolPromise = pool.promise();
 /**
@@ -11,7 +11,7 @@ const poolPromise = pool.promise();
  * @param {string} category_id - The category_id of the product
  * @param {string} image_url - The url of the product image
  */
-export function createProduct(
+export function createProduct (
   name,
   description,
   price,
@@ -19,8 +19,8 @@ export function createProduct(
   category_id,
   image_url
 ) {
-  let createProductQuery =
-    "INSERT INTO Products(name, description, price, stock_quantity, category_id) VALUES(?, ?, ?, ?, ?)";
+  const createProductQuery =
+    'INSERT INTO Products(name, description, price, stock_quantity, category_id) VALUES(?, ?, ?, ?, ?)';
 
   return new Promise((resolve, reject) => {
     poolPromise.query(
@@ -29,19 +29,18 @@ export function createProduct(
       (error, result) => {
         if (error) {
           reject(error);
-          return;
         } else {
           resolve(result);
           const product_id = result[0].insertId;
-          let insertImageQuery =
-            "INSERT INTO Images(product_id, url) VALUES(?, ?)";
+          
+          const insertImageQuery =
+            'INSERT INTO Images(product_id, url) VALUES(?, ?)';
           return new Promise(
             insertImageQuery,
             [product_id, image_url],
             (error, result) => {
               if (error) {
                 reject(error);
-                return;
               } else {
                 resolve(result);
               }
@@ -52,4 +51,3 @@ export function createProduct(
     );
   });
 }
-
