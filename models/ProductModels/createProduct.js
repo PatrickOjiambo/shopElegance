@@ -1,4 +1,4 @@
-import pool from '../createdb.js';
+import pool from "../createdb.js";
 // Check the category_id well. Could be a problem
 // Provide a corresponding implementation of it elsewhere
 const poolPromise = pool.promise();
@@ -11,7 +11,7 @@ const poolPromise = pool.promise();
  * @param {string} category_id - The category_id of the product
  * @param {string} image_url - The url of the product image
  */
-export function createProduct (
+export async function createProduct(
   name,
   description,
   price,
@@ -19,35 +19,25 @@ export function createProduct (
   category_id,
   image_url
 ) {
-  const createProductQuery =
-    'INSERT INTO Products(name, description, price, stock_quantity, category_id) VALUES(?, ?, ?, ?, ?)';
-
-  return new Promise((resolve, reject) => {
-    poolPromise.query(
-      createProductQuery,
-      [name, description, price, stock_quantity, category_id],
-      (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-          const product_id = result[0].insertId;
-          
-          const insertImageQuery =
-            'INSERT INTO Images(product_id, url) VALUES(?, ?)';
-          return new Promise(
-            insertImageQuery,
-            [product_id, image_url],
-            (error, result) => {
-              if (error) {
-                reject(error);
-              } else {
-                resolve(result);
-              }
-            }
-          );
-        }
-      }
-    );
-  });
+  try {
+    const createProductQuery =
+      "INSERT INTO Products(name, description, price, stock_quantity, category_id) VALUES(?, ?, ?, ?, ?)";
+    console.log("This ran yess!!!");
+    const productQuery = await poolPromise.query(createProductQuery, [
+      name,
+      description,
+      price,
+      stock_quantity,
+      category_id,
+    ]);
+    const product_id = productQuery[0].insertId;
+    const insertImageQuery = "INSERT INTO Images(product_id, url) VALUES(?, ?)";
+    const imageQuery = await poolPromise.query(insertImageQuery, [
+      product_id,
+      image_url,
+    ]);
+    console.log(imageQuery);
+  } catch (error) {
+    console.log(error);
+  }
 }
