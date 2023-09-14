@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS Reviews(
     product_id INT,
     rating FLOAT NOT NULL,
     comment VARCHAR(45),
-    created_at DATETIME NOT NULL
+    created_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now()
 );
 `,
 `
