@@ -55,7 +55,8 @@ export const register = async (req, res) => {
     // Send a success response with token and email
     return res
       .status(200)
-      .json({ message: "User registration successful", token, email });
+      .json({ message: "User registration successful"}).end();
+      
   } catch (error) {
     console.error("Error during registration:", error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -80,7 +81,6 @@ export const login = async (req, res) => {
     // Compare the hashed password
     const userRole = "user";
     const passwordMatch = await bcrypt.compare(password, user[0].password_hash);
-
     if (passwordMatch) {
       // Generate and send a JWT token upon successful login
       const token = JWT.sign(

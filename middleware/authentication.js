@@ -1,7 +1,7 @@
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-export function isAuthenticated(req, res, next) {
+export default function isAuthenticated(req, res, next) {
   const token = req.cookies.token;
   if (!token) {
     return res.redirect("/");
