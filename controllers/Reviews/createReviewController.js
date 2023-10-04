@@ -1,4 +1,3 @@
-import pool from "../../models/createdb.js";
 //Ensure the user_id and product_id are passed nicely to
 // the reviews
 import { createReview } from "../../models/ReviewModels/createReview.js";

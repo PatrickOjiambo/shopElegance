@@ -1,4 +1,4 @@
-import pool from "./createdb.js";
+import pool from "../createdb.js";
 const poolPromise = pool.promise();
 
 

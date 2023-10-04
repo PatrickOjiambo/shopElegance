@@ -8,15 +8,13 @@ const poolPromise = pool.promise()
  * 
  * @param {string} category_name - Name of the category
  */
-export async function getProducts (category_name) {
-  
-try{
-  const getProductQuery = 'SELECT * FROM Categories WHERE name = ?';
-  const categoryResults = await poolPromise.query(getProductQuery, [category_name])
-  req.status(200).json({category_name: categoryResults})
+export async function getProducts () {
+  try{
+    const getProductsquery = "SELECT "
+  }
+  catch{
+    
+  }
 }
-catch(error){
-resizeBy.status(500).json({'Server error': error})
-}
-}
+
 module.exports = { getProducts };
