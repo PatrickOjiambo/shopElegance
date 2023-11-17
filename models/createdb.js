@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 export const pool = mysql.createPool({
   host: process.env.HOST,
-  user: process.env.DBUSER,
+  user: process.env.DBUSER, 
   password: process.env.PASSWORD,
   database: process.env.DBNAME
 });
@@ -14,8 +14,7 @@ const createTables = [
 `
 CREATE TABLE IF NOT EXISTS Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
-    first_name VARCHAR(45) NOT NULL,
-    last_name VARCHAR(45) NOT NULL,
+    name VARCHAR(45) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(200) NOT NULL,
     phone_number varchar(50) NOT NULL UNIQUE
@@ -79,7 +78,9 @@ CREATE TABLE IF NOT EXISTS Reviews(
     product_id INT,
     rating FLOAT NOT NULL,
     comment VARCHAR(45),
-    created_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now()
+    created_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now(),
+    FOREIGN KEY (user_id) REFERENCES Users (user_id),
+    FOREIGN KEY (product_id) REFERENCES Products (product_id)
 );
 `,
 `

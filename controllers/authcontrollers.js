@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 
 const poolPromise = pool.promise();
 export const register = async (req, res) => {
-  const { first_name, last_name, email, phone_number, password } = req.body;
+  const { name, email, phone_number, password } = req.body;
 
   try {
     // Check if the email is already in the database.
@@ -31,8 +31,7 @@ export const register = async (req, res) => {
 
     // Store the user
     const userCreationResult = await createUser(
-      first_name,
-      last_name,
+      name,
       email.toLowerCase(),
       password_hash,
       phone_number
@@ -55,8 +54,8 @@ export const register = async (req, res) => {
     // Send a success response with token and email
     return res
       .status(200)
-      .json({ message: "User registration successful"}).end();
-      
+      .json({ message: "User registration successful" })
+      .end();
   } catch (error) {
     console.error("Error during registration:", error);
     return res.status(500).json({ error: "Internal Server Error" });
