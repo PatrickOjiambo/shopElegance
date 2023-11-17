@@ -92,7 +92,9 @@ export const login = async (req, res) => {
       res.cookie("token", token, {
         httpOnly: true,
       });
+      console.log("Successful login")
       return res.status(200).json({ message: "Successfull login" });
+     
     } else {
       return res.status(400).json({ message: "Incorrect password" });
     }
