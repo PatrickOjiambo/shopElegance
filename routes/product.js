@@ -1,7 +1,7 @@
 import express from 'express';
-import { createProductController } from '../controllers/Products/createProduct.js';
-import { upload, handleImageUpload } from '../middleware/imageUpload.js';
-
+import { getProductController } from '../controllers/getProduct.js';
+import { getOneProductController } from '../controllers/getProduct.js';
 const router = express.Router();
-router.post('/', upload.single('image'), createProductController);
+router.get('/', getProductController)
+router.get('/:id', getOneProductController)
 export default router;
